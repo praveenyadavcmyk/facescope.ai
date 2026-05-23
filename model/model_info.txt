@@ -1,0 +1,3 @@
+best_model=Logistic Regression
+accuracy=1.0000
+f1_score=1.0000
