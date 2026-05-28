@@ -116,9 +116,15 @@ function hideAll() {
   resultContainer.classList.remove('visible');
   errorContainer.classList.remove('visible');
   // Reset loading steps
-  steps.forEach(s => { s.classList.remove('active', 'done'); });
-  steps[0].classList.add('active');
+  if (steps && steps.length > 0) {
+    steps.forEach(s => {
+        s.classList.remove('active', 'done');
+    });
+
+    steps[0].classList.add('active');
 }
+}
+
 
 function showLoading() {
   hideAll();
@@ -253,3 +259,53 @@ sections.forEach(s => observer.observe(s));
 // ── Init ──────────────────────────────────────────────────────
 hideAll();
 console.log('%c FakeScope loaded ', 'background:#00e5a0;color:#080b0f;font-weight:bold;padding:4px 8px;border-radius:4px;');
+analyzeBtn.addEventListener('click', analyzeArticle);
+
+async function analyzeArticle() {
+
+    const news = newsInput.value;
+
+    const response = await fetch('/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: news })
+    });
+
+    const data = await response.json();
+
+    result.innerText = data.prediction;
+}
+async function analyzeArticle() {
+
+    const news = newsInput.value;
+
+    if(news.trim() === "") {
+        alert("Please enter news text");
+        return;
+    }
+
+    try {
+
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text: news
+            })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("result").innerText =
+            "Prediction: " + data.prediction;
+
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+analyzeBtn.addEventListener('click', analyzeArticle);
