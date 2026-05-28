@@ -1,20 +1,6 @@
-# ============================================================
-#  Fake News Detection System — Python Dependencies
-# ============================================================
-#  Install with:  pip install -r requirements.txt
-
-# Web framework
 flask==3.0.3
-
-# Machine Learning & NLP
-scikit-learn==1.5.1
-nltk==3.8.1
+gunicorn==22.0.0
 numpy==1.26.4
 pandas==2.2.2
-
-# Visualization (for train_model.py charts)
-matplotlib==3.9.1
-seaborn==0.13.2
-
-# Utilities
-gunicorn==22.0.0        # Production WSGI server (optional)
+scikit-learn==1.5.1
+nltk==3.9.1
